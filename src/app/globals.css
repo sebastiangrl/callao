@@ -2,6 +2,22 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: "TheSilverEditorial";
+  src: url("/identity/fonts/TheSilverEditorial-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TheSilverEditorial";
+  src: url("/identity/fonts/TheSilverEditorial-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 html,
 body {
   height: 100%;
@@ -10,5 +26,7 @@ body {
 body {
   background: #080503;
   color: #ffffff;
+  font-family: "TheSilverEditorial", ui-serif, Georgia, "Times New Roman",
+    serif;
 }
 
