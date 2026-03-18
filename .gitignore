@@ -1,0 +1,41 @@
+node_modules
+.next
+.turbo
+.turbopack
+.cache
+
+# pnpm / corepack caches local (workspace)
+.pnpm-store
+.pnpm-home
+.corepack
+
+# build artifacts / ts incremental
+*.tsbuildinfo
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel / Next outputs
+.vercel
+.output
+out/
+
+# ESLint
+.eslintcache
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*.tmp
+
