@@ -65,12 +65,16 @@ export default function AdminLoginPage() {
           {/* 2 columnas compactas: imagen a la izquierda y form a la derecha */}
           <div className="grid h-full w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:items-stretch min-h-0">
             <div className="flex h-full items-center justify-center overflow-hidden bg-black/20 p-3">
-              <img
-                src="/mock/mock-1.png"
-                alt="Callao admin"
-                className="h-full w-full max-w-[480px] object-contain"
-                draggable={false}
-              />
+              <div className="relative h-full w-full max-w-[480px]">
+                <img
+                  src="/mock/mock-1.png"
+                  alt="Callao admin"
+                  className="absolute inset-0 h-full w-full object-contain"
+                  draggable={false}
+                />
+                {/* Degradado: transparente -> negro (bottom) */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80" />
+              </div>
             </div>
 
             <div className="flex h-full w-full flex-col items-center justify-center min-h-0">
