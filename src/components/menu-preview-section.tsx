@@ -39,9 +39,6 @@ function imgCevicheTiradito(file: string) {
   return encodeURI(`/menu/ceviches y tiraditos/${file}`);
 }
 
-/** Ñ en el archivo del disco es N + tilde combinante (NFC distinto). */
-const FILE_NOQUIS = "N\u0303OQUIS DE PLATANO.webp";
-
 export const MENU_ALL_ITEMS: MenuPreviewItem[] = [
   {
     id: "papas-trufadas",
@@ -86,7 +83,7 @@ export const MENU_ALL_ITEMS: MenuPreviewItem[] = [
     description:
       "Ñoquis de plátano maduro, espuma de quesos, miel de plátano, pasta de hongos. Terminados con aceite de trufa y queso paipa rallado.",
     price: "$ 34.000",
-    image: imgPlatoPequeño(FILE_NOQUIS)
+    image: imgPlatoPequeño("NOQUIS DE PLATANO.webp")
   },
   {
     id: "camarones-tikka",
@@ -219,6 +216,19 @@ export default function MenuPreviewSection({
   }, [selected, items.length, activeCategory]);
 
   useEffect(() => {
+    if (items.length < 2 || typeof window === "undefined") return;
+    const warm = (idx: number) => {
+      const url = items[idx]?.image;
+      if (!url) return;
+      const img = new Image();
+      img.decoding = "async";
+      img.src = url;
+    };
+    warm((selected + 1) % items.length);
+    warm((selected - 1 + items.length) % items.length);
+  }, [selected, items]);
+
+  useEffect(() => {
     if (!mobileCatOpen) return;
     const close = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
@@ -255,6 +265,9 @@ export default function MenuPreviewSection({
               key={item.id}
               src={item.image}
               alt=""
+              decoding="async"
+              loading={i === selected ? "eager" : "lazy"}
+              fetchPriority={i === selected ? "high" : "low"}
               className={[
                 "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out",
                 i === selected ? "opacity-100" : "opacity-0"
@@ -413,6 +426,9 @@ export default function MenuPreviewSection({
                     <img
                       src={item.image}
                       alt=""
+                      decoding="async"
+                      loading={i === selected ? "eager" : "lazy"}
+                      fetchPriority={i === selected ? "high" : "low"}
                       className="h-full w-full object-cover transition-transform duration-300 group-hover/th:scale-110"
                     />
                   </button>
@@ -433,6 +449,9 @@ export default function MenuPreviewSection({
                 key={`z-${item.id}`}
                 src={item.image}
                 alt=""
+                decoding="async"
+                loading={i === selected ? "eager" : "lazy"}
+                fetchPriority={i === selected ? "high" : "low"}
                 className={[
                   "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out",
                   "scale-[2.35] object-[48%_38%]",

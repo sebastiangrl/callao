@@ -1,5 +1,7 @@
 import type { HTMLAttributes } from "react";
 
+import LazyCoverVideo from "@/components/lazy-cover-video";
+
 export type PastEventTicket = {
   id: string;
   dateLabel: string;
@@ -90,16 +92,10 @@ function EventCoverMedia({
 }) {
   if (event.coverVideo) {
     return (
-      <video
+      <LazyCoverVideo
         src={event.coverVideo}
         className={className}
-        muted
-        playsInline
-        loop
-        autoPlay
-        preload="metadata"
         {...(event.coverImage ? { poster: event.coverImage } : {})}
-        aria-hidden
       />
     );
   }
